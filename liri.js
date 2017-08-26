@@ -3,6 +3,7 @@ var request = require("request")
 var Twitter = require("twitter");
 
 var twitterKeys = require("./keys.js");
+var client = twitterKeys.twitterKeys;
 
 var Spotify = require("node-spotify-api");
  
@@ -11,10 +12,19 @@ var spotify = new Spotify({
   secret: "cb6b21e0dca349f19151bfae1dfd5cc2"
 });
 
-spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
+//spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+ // if (err) {
+ //   return console.log('Error occurred: ' + err);
+ // }
  
-console.log(data); 
+//console.log(data); 
+//});
+
+var params = {screen_name: 'webdeveloper82'};
+
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+  }
 });
+
