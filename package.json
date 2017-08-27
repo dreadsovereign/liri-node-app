@@ -2,7 +2,7 @@
   "name": "liri-app",
   "version": "1.0.0",
   "description": "liri app",
-  "main": "keys.js",
+  "main": "liri.js",
   "dependencies": {
     "request": "^2.81.0",
     "twitter": "^1.7.1",
