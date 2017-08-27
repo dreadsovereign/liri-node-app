@@ -20,7 +20,7 @@ function liri () {
 if (input1 === "my-tweets") {
 
 var params = {
-    screen_name: 'webdeveloper82',
+    screen_name: input2,
     count: 20
 };
 
@@ -31,6 +31,9 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
           console.log('Tweet: ' + individualTweet.text);
           console.log("--------------------------------------------");
       })
+    } else if (input2.length < 1) {
+
+            input2 = "webdeveloper82";
     }
   })
 } else if (input1 === "spotify-this-song") {
