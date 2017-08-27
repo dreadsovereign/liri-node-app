@@ -1,4 +1,5 @@
 var fs = require("fs");
+
 var request = require("request");
 
 var twitter = require("twitter");
@@ -6,12 +7,13 @@ var twitter = require("twitter");
 var keys = require("./keys.js");
 
 var client = new twitter(keys.twitterKeys);
+var spotify = new Spotify(keys.spotifykeys);
 
 var input1 = process.argv[2];
 var input2 = process.argv.slice(3).join(" ");
 
 var Spotify = require("node-spotify-api");
-var spotify = new Spotify(keys.spotifykeys);
+
 
 liri ();
 
@@ -42,11 +44,12 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
  if (err) {
    return console.log('Error occurred: ' + err);
   }
+ var spotifyinfo = data.tracks.items[0];
  console.log("\n--------------------------------------------\n");
- console.log("Artist: " + data.tracks.items[0].artists[0].name); 
- console.log("Song: " + data.tracks.items[0].name);
- console.log("Preview: " + data.tracks.items[0].preview_url);
- console.log("Album: " + data.tracks.items[0].album.name);
+ console.log("Artist: " + spotifyinfo.artists[0].name); 
+ console.log("Song: " + spotifyinfo.name);
+ console.log("Preview: " + spotifyinfo.preview_url);
+ console.log("Album: " + spotifyinfo.album.name);
  console.log("\n--------------------------------------------\n");
 });
 
@@ -57,14 +60,15 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
   };
   request("http://www.omdbapi.com/?t=" + input2 + "&y=&plot=short&r=json&tomatoes=true&apikey=40e9cece", function(error, response, body) {
     if (!error && response.statusCode === 200) {
+      var omdbinfo = JSON.parse(body);
       console.log("\n--------------------------------------------------------------------\n");
-      console.log("Title: " + JSON.parse(body).Title);
-      console.log("Year: " + JSON.parse(body).Year);
-      console.log("IMDb Rating: " + JSON.parse(body).imdbRating);
-      console.log("Rotten Tomatoes: " + JSON.parse(body).Ratings[1].Value);
-      console.log("Country: " + JSON.parse(body).Country);
-      console.log("Plot: " + JSON.parse(body).Plot);
-      console.log("Actors: " + JSON.parse(body).Actors);
+      console.log("Title: " + omdbinfo.Title);
+      console.log("Year: " + omdbinfo.Year);
+      console.log("IMDb Rating: " + omdbinfo.imdbRating);
+      console.log("Rotten Tomatoes: " + omdbinfo.Ratings[1].Value);
+      console.log("Country: " + omdbinfo.Country);
+      console.log("Plot: " + omdbinfo.Plot);
+      console.log("Actors: " + omdbinfo.Actors);
       console.log("\n--------------------------------------------------------------------\n");
     }
   })
