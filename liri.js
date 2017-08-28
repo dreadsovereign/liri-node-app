@@ -69,7 +69,9 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
       console.log("Year: " + omdbinfo.Year);
       console.log("IMDb Rating: " + omdbinfo.imdbRating);
       console.log("Rotten Tomatoes: " + omdbinfo.Ratings[1].Value);
+      console.log("Metascore: " + omdbinfo.Metascore);
       console.log("Country: " + omdbinfo.Country);
+      console.log("Language(s): " + omdbinfo.Language);
       console.log("Plot: " + omdbinfo.Plot);
       console.log("Actors: " + omdbinfo.Actors);
       console.log("--------------------------------------------------------------------");
