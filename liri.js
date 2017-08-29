@@ -13,6 +13,20 @@ var input2 = process.argv.slice(3).join(" ");
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotifykeys);
 
+function log() {
+
+    fs.appendFile('./log.txt', input1 + " " + input2 + "\n", function(err) {
+
+      if (err) {
+          console.log(err);
+      }
+     
+      else {
+         
+    }
+  });
+};
+
 liri ();
 
 function liri () {
@@ -36,6 +50,9 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
             input2 = "webdeveloper82";
     }
   })
+
+log();
+
 } else if (input1 === "spotify-this-song") {
   if (input2.length < 1) {
 
@@ -54,6 +71,8 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
    console.log("Album: " + spotifyinfo.album.name);
    console.log("--------------------------------------------");
 });
+
+log();
 
 } else if (input1 === "movie-this") {
   if (input2.length < 1) {
@@ -77,6 +96,9 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
       console.log("--------------------------------------------------------------------");
     }
   })
+
+log();
+
 } else if (input1 === "do-what-it-says") {
   
   fs.readFile("random.txt", "utf8", function(error, data) {
